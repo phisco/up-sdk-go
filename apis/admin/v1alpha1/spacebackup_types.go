@@ -37,10 +37,6 @@ type SpaceBackup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
-	// +kubebuilder:validation:XValidation:rule="self.configRef == oldSelf.configRef",message="backup config ref can not be changed after creation"
-	// +kubebuilder:validation:XValidation:rule="self.match == oldSelf.match",message="spec.match is immutable"
-	// +kubebuilder:validation:XValidation:rule="self.exclude == oldSelf.exclude",message="spec.exclude is immutable"
-	// +kubebuilder:validation:XValidation:rule="self.controlPlaneBackups == oldSelf.controlPlaneBackups",message="spec.controlPlaneBackups is immutable"
 	Spec   SpaceBackupSpec   `json:"spec"`
 	Status SpaceBackupStatus `json:"status,omitempty"`
 }

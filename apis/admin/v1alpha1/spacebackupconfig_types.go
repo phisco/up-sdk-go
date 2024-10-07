@@ -63,13 +63,12 @@ type SpaceBackupObjectStorage struct {
 
 	// Credentials specifies the credentials to access the object storage.
 	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:XValidation:rule="self.source != 'Secret' || (has(self.secretRef) && has(self.secretRef.name) && has(self.secretRef.namespace))",message="secretRef.name and namespace must be set when source is Secret"
+	// +kubebuilder:validation:XValidation:rule="self.source != 'Environment' || (has(self.environment) && has(self.environment.name))",message="environment.name must be set when source is Environment"
 	Credentials SpaceBackupCredentials `json:"credentials"`
 }
 
 // SpaceBackupCredentials specifies the credentials to access the object storage.
-//
-// +kubebuilder:validation:XValidation:rule="self.source != 'Secret' || (has(self.secretRef) && has(self.secretRef.name) && has(self.secretRef.namespace))",message="secretRef.name and namespace must be set when source is Secret"
-// +kubebuilder:validation:XValidation:rule="self.source != 'Environment' || (has(self.environment) && has(self.environment.name))",message="environment.name must be set when source is Environment"
 type SpaceBackupCredentials struct {
 	// Source of the credentials.
 	// Source "Secret" requires "get" permissions on the referenced Secret.

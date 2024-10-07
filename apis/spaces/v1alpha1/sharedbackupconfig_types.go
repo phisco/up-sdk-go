@@ -55,6 +55,7 @@ type SharedBackupConfigList struct {
 type SharedBackupConfigSpec struct {
 	// ObjectStorage specifies the object storage configuration for the given provider.
 	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:XValidation:rule="self.source != 'Secret' || (has(self.secretRef) && has(self.secretRef.name))",message="secretRef.name must be set when source is Secret"
 	ObjectStorage BackupObjectStorage `json:"objectStorage"`
 }
 
@@ -99,7 +100,6 @@ type BackupObjectStorage struct {
 
 	// Credentials specifies the credentials to access the object storage.
 	// +kubebuilder:validation:Required
-	// +kubebuilder:validation:XValidation:rule="self.source != 'Secret' || (has(self.secretRef) && has(self.secretRef.name))",message="secretRef.name must be set when source is Secret"
 	Credentials BackupCredentials `json:"credentials"`
 }
 
