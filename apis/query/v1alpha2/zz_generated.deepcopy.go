@@ -412,6 +412,11 @@ func (in *QueryResponseObject) DeepCopyInto(out *QueryResponseObject) {
 		*out = new(QueryResponseControlPlane)
 		**out = **in
 	}
+	if in.Categories != nil {
+		in, out := &in.Categories, &out.Categories
+		*out = make([]string, len(*in))
+		copy(*out, *in)
+	}
 	if in.Object != nil {
 		in, out := &in.Object, &out.Object
 		*out = (*in).DeepCopy()

@@ -95,6 +95,9 @@ type QueryResponseObject struct {
 	// controlPlane is the name and namespace of the object.
 	ControlPlane *QueryResponseControlPlane `json:"controlPlane,omitempty"`
 
+	// Categories is the list of categories of the object.
+	Categories []string `json:"categories,omitempty"`
+
 	// object is the sparse representation of the object.
 	Object *common.JSONObject `json:"object,omitempty"`
 

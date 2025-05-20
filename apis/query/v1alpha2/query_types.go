@@ -276,6 +276,9 @@ type QueryObjects struct {
 	// object should be returned.
 	ControlPlane bool `json:"controlPlane,omitempty"`
 
+	// categories specifies that the categories of the object should be returned.
+	Categories bool `json:"categories,omitempty"`
+
 	// object specifies how to return the object, i.e. a sparse skeleton of
 	// fields. A value of true means that all descendants of that field should
 	// be returned. Other primitive values are not allowed. If the type of
